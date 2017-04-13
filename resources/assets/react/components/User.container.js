@@ -11,6 +11,11 @@ class UserContainer extends Component {
     }
 
     componentDidMount () {
+        Echo.channel('user')
+            .listen('UserCreated', (e) => {
+                console.log(e);
+            });
+
         User.getAll().then(
             (response) => this.setState({ users: response.data })
         ).catch(

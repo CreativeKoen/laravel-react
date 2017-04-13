@@ -1,0 +1,26 @@
+{
+	"authHost": "http://localhost",
+	"authEndpoint": "/broadcasting/auth",
+	"clients": [
+		{
+			"appId": "c0a85ff2b6d82e97",
+			"key": "ad314d0c6ee3cc2f7029265f6309439e"
+		}
+	],
+	"database": "sqlite",
+	"databaseConfig": {
+		"redis": {},
+		"sqlite": {
+			"databasePath": "/database/database.sqlite"
+		}
+	},
+	"devMode": true,
+	"host": null,
+	"port": "6001",
+	"protocol": "http",
+	"socketio": {
+		"wsEngine": "uws"
+	},
+	"sslCertPath": "",
+	"sslKeyPath": ""
+}

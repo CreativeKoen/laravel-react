@@ -3,11 +3,14 @@
 namespace App\Http\Controllers\Api;
 
 use App\User;
+use App\Events\UserCreated;
 use Illuminate\Http\Request;
+use Dingo\Api\Routing\Helpers;
 use App\Http\Controllers\Controller;
 
 class UserController extends Controller
 {
+    use Helpers;
     /**
      * Display a listing of the resource.
      *
@@ -25,7 +28,6 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
     }
 
     /**
@@ -36,7 +38,16 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $user = new User();
+        $user->name = $request->get('name');
+        $user->email = $request->get('email');
+        $user->password = $request->get('password');
+        $user->save();
+
+        event(new UserCreated($user));
+
+        return $this->response->created();
+
     }
 
     /**
@@ -47,7 +58,8 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //
+        $user = User::findOrFail($id);
+        return $this->response->array($user->toArray());
     }
 
     /**
@@ -81,6 +93,6 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        User::destroy($id);
     }
 }
